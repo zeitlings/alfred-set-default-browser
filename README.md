@@ -8,13 +8,13 @@ __Some Popular Browsers__
 ```
  Name			| Bundle Identifier
 --------------------------------------------
-Safari			| com.apple.Safar
-Google Chrome		| com.google.Chrom
-Firefox			| org.mozilla.firefo
-Opera			| com.operasoftware.Oper
-Brave Browser		| com.brave.Browse
-Tor Browser		| org.torproject.torbrowse
-Microsoft Edge		| com.microsoft.edgema
+Safari			| com.apple.Safari
+Google Chrome		| com.google.Chrome
+Firefox			| org.mozilla.firefox
+Opera			| com.operasoftware.Opera
+Brave Browser		| com.brave.Browser
+Tor Browser		| org.torproject.torbrowser
+Microsoft Edge		| com.microsoft.edgemac
 Vivaldi			| com.vivaldi.Vivaldi
 ```
 --------
