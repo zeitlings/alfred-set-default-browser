@@ -1,7 +1,23 @@
 # alfred-set-default-browser
-An Alfred workflow for setting the default browser.
+An Alfred workflow for setting the default browser.  
+[[Download]](https://github.com/zeitlings/alfred-set-default-browser/raw/main/Set%20Default%20Browser.alfredworkflow)
 
 Add the browsers you want as options to the list (within Alfred App) and provide their bundle identifiers. By default, the list contains entries for Safari and Brave. Instead of adding the bundle identifier for, e.g. Brave Browser (com.brave.Browser), you can also just provide the name (Brave), which should also work. None of this is thoroughly tested.
+
+__Some Popular Browsers__
+```
+ Name			| Bundle Identifier
+--------------------------------------------
+Safari			| com.apple.Safar
+Google Chrome		| com.google.Chrom
+Firefox			| org.mozilla.firefo
+Opera			| com.operasoftware.Oper
+Brave Browser		| com.brave.Browse
+Tor Browser		| org.torproject.torbrowse
+Microsoft Edge		| com.microsoft.edgema
+Vivaldi			| com.vivaldi.Vivaldi
+```
+--------
 
 The executable is basically a rewrite of [this code by "jw bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adjusted to work nicely with Alfred.
 It was compiled on a MacBook with ARM Processor (M1 Pro). Should it not work for you or should you not want to run an opaque executable, just recompile it and replace the included version. (Right-click the Workflow and select `Reveal in Finder` for the location.)
