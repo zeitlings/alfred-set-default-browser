@@ -1,6 +1,6 @@
 # Set Default Browser
 
-Alfred workflow to set the default browser. [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.0.0)
+Alfred workflow to set the default browser. [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.1.0)
 
 Add the browsers that you are missing to the list filter, and provide the bundle identifiers for them. Instead of adding the bundle identifier for, e.g. Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. This workflow has not been thoroughly tested. 
 
