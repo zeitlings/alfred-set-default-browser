@@ -17,13 +17,13 @@ public struct Workflow {
     public static func main() {
 		
 		guard let bundleID: String = args.indices.contains(1) ? args[1] : nil else {
-			stdOut.write(Data("failure".utf8)) // No BundleID input
+			stdOut.write(Data("No bundle identifier was specified as argument.".utf8))
 			exit(.failure)
 		}
 		
-		let browsersAvailable: [URL] = getApplicationURLs()
+		let browsersUsable: [URL] = getApplicationURLs()
 		let browserDefault: URL? = getDefaultBrowserURL()
-		let browserBundles: [BrowserBundle] = browsersAvailable
+		let browserBundles: [BrowserBundle] = browsersUsable
 			.intoBrowserBundles(currentDefault: browserDefault)
 		
 		guard
@@ -59,12 +59,14 @@ extension Workflow {
 	
 	static func setDefault(browser bundle: BrowserBundle) {
 		if bundle.isDefault {
-			let msg: Data = Data("\(bundle.name) (\(bundle.id)) is already the default browser".utf8)
+			//let msg: Data = Data("\(bundle.name) already is the default browser".utf8)
+			let msg: Data = Data("same,\(bundle.name),already is the default browser".utf8)
 			stdOut.write(msg)
 			exit(.success)
 		} else {
 			LSSetDefaultHandlerForURLScheme("http" as CFString, bundle.id as CFString)
-			let msg: Data = Data("\(bundle.name) (\(bundle.id)) is now the default browser".utf8)
+			//let msg: Data = Data("\(bundle.name) is now the default browser".utf8)
+			let msg: Data = Data("success,\(bundle.name),is now the default browser".utf8)
 			stdOut.write(msg)
 			exit(.success)
 		}
@@ -100,7 +102,6 @@ extension Bundle {
 }
 
 extension Array where Element == URL {
-	
 	func intoBrowserBundles(currentDefault defaultBrowserPath: URL?) -> [BrowserBundle] {
 		return reduce(into: [], {
 			if let bundle: Bundle = .init(url: $1),
@@ -114,5 +115,4 @@ extension Array where Element == URL {
 			}
 		}).sorted(by: { $0.id > $1.id })
 	}
-	
 }
