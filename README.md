@@ -1,10 +1,11 @@
-# alfred-set-default-browser
-An Alfred workflow for setting the default browser.  
-[[Download]](https://github.com/zeitlings/alfred-set-default-browser/raw/main/Set%20Default%20Browser.alfredworkflow)
+# Set Default Browser
 
-Add the browsers you want as options to the list (within Alfred App) and provide their bundle identifiers. By default, the list contains entries for Safari and Brave. Instead of adding the bundle identifier for, e.g. Brave Browser (com.brave.Browser), you can also just provide the name (Brave), which should also work. None of this is thoroughly tested.
+Alfred workflow to set the default browser. [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.0.0)
 
-__Some Popular Browsers__
+Add the browsers that you are missing to the list filter, and provide the bundle identifiers for them. Instead of adding the bundle identifier for, e.g. Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. This workflow has not been thoroughly tested. 
+
+ __Some Popular Browsers__
+ 
 ```
  Name			| Bundle Identifier
 --------------------------------------------
@@ -19,8 +20,8 @@ Vivaldi			| com.vivaldi.Vivaldi
 ```
 --------
 
-The executable is basically a rewrite of [this code by "jw bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adjusted to work nicely with Alfred.
-It was compiled on a MacBook with ARM Processor (M1 Pro). Should it not work for you or should you not want to run an opaque executable, just recompile it and replace the included version. (Right-click the Workflow and select `Reveal in Finder` for the location.)
+The executable is largely a rewrite of [this code by "J.W. Bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adapted to work well with Alfred. It is a universal binary and will run on Macs with either ARM or Intel processors. If for some reason it does not work for you, or if you do not want to run an opaque executable, recompile and replace the included version. (Right-click the workflow and select `Reveal in Finder` for the location).
+
 
 ## Recompile
 
@@ -39,7 +40,7 @@ This will generate the following structure for you:
 ├── README.md
 ├── Sources
 │   └── set_default_browser
-│       └── main.swift
+│       └── set_default_browser.swift
 └── Tests
     └── set_default_browserTests
         └── set_default_browserTests.swift
