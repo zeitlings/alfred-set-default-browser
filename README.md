@@ -1,6 +1,9 @@
 # Set Default Browser
 
-Alfred workflow to set the default browser. [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.1.0)
+Alfred workflow to set the default browser. 
+- Script Version [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.1.1) (preferred)
+- Compiled Version [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.1.0)
+
 
 Add the browsers that you are missing to the list filter, and provide the bundle identifiers for them. Instead of adding the bundle identifier for, e.g. Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. This workflow has not been thoroughly tested. 
 
@@ -18,7 +21,14 @@ Tor Browser		| org.torproject.torbrowser
 Microsoft Edge		| com.microsoft.edgemac
 Vivaldi			| com.vivaldi.Vivaldi
 ```
---------
+
+
+## Script Version
+
+v1.1.1 dispenses with the executable entirely. The code runs directly in Alfred's Run Script workflow object. There is no noticable performance penalty and no manual compilation or `chmod +x` permissions are required.
+
+
+## Compiled Version
 
 The executable is largely a rewrite of [this code by "J.W. Bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adapted to work well with Alfred. It is a universal binary and will run on Macs with either ARM or Intel processors. If for some reason it does not work for you, or if you do not want to run an opaque executable, recompile and replace the included version. (Right-click the workflow and select `Reveal in Finder` for the location).
 
