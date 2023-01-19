@@ -1,126 +1,118 @@
+//
+//  set_default_browser.swift
+//
+//  Created by Patrick Sy on 19/01/2023.
+//  Credit to J.W. Bargsten: https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1
+//
+
 import Foundation
-import ApplicationServices
-import ArgumentParser
 
-let HTTP_FLAG = URL(string: "http:")! as CFURL
-
-struct Command: ParsableCommand {
-	@Flag(help: "Write browser info to console")
-	var print = false
+@main
+public struct Workflow {
+	static let args: [String] = CommandLine.arguments
+	static let stdOut: FileHandle = .standardOutput
+	static let httpFlag = URL(string: "http:")! as CFURL
+	static let options: NSString.CompareOptions = [.caseInsensitive, .diacriticInsensitive]
 	
-	@Argument(help: "The bundle-Id of the new default browser, e.g. com.google.Chrome. Alternatively, enter the name, e.g. Brave")
-	var bundleId: String?
-	
-	mutating func run() throws {
-		try handleCommand(bundleId: bundleId, printBundles: print)
-	}
-}
-
-extension Command {
-	func handleCommand(bundleId: String?, printBundles: Bool = false) throws -> Void {
-		let standardOutput: FileHandle = .standardOutput
-		guard let bundleId = bundleId else {
-			standardOutput.write("No bundle-Id input.")
-			return
-		}
-		let applicationPaths: [URL] = getApplicationURLs()
-		let defaultBrowserPath: URL? = getDefaultBrowserURL()
-		let browserBundles: [BrowserBundle] = applicationPaths
-			.intoBrowserBundles(currentDefault: defaultBrowserPath)
-
-		if printBundles {
-			browserBundles.forEach { $0.println() }
+    public static func main() {
+		
+		guard let bundleID: String = args.indices.contains(1) ? args[1] : nil else {
+			stdOut.write(Data("failure".utf8)) // No BundleID input
+			exit(.failure)
 		}
 		
-		if let newDefault: BrowserBundle = browserBundles
-			.first(where: {
-				$0.id == bundleId
-				|| $0.name.lowercased().contains(bundleId.lowercased())
+		let browsersAvailable: [URL] = getApplicationURLs()
+		let browserDefault: URL? = getDefaultBrowserURL()
+		let browserBundles: [BrowserBundle] = browsersAvailable
+			.intoBrowserBundles(currentDefault: browserDefault)
+		
+		guard
+			let newDefault: BrowserBundle = browserBundles.first(where: {
+				$0.id == bundleID
+				|| $0.name.range(of: bundleID, options: options) != nil
 			})
-		{
-			setDefault(browser: newDefault, fileHandle: standardOutput)
-			
-		} else {
-			let options: String = browserBundles.map { $0.description }.joined(separator: "\n")
-			let error: String = "Browser '\(bundleId)' is not installed. Options:\n\(options)"
-			standardOutput.write(error)
+		else {
+			let options: String = browserBundles.map({ $0.description }).joined(separator: "\n")
+			let message: String = "Browser '\(bundleID)' is not installed. Options:\n\(options)"
+			stdOut.write(Data(message.utf8))
+			exit(.failure)
 		}
-	}
+		
+		setDefault(browser: newDefault)
+        
+    }
 }
 
-extension Command {
-	/// Get the file system path of applications that can open "http:"-URLs
-	/// - Returns: The URLs of elligible browsers and other applications.
-	func getApplicationURLs() -> [URL] {
-		let urls = LSCopyApplicationURLsForURL(HTTP_FLAG, .all)?.takeRetainedValue() as? [URL]
-		return urls == nil ? [] : .init(Set(urls!))
+extension Workflow {
+	/// Get the file system path of applications that respond to http
+	///  - Returns: The URLs of compatible browsers and other applications
+	static func getApplicationURLs() -> [URL] {
+		guard let urls: [URL] = LSCopyApplicationURLsForURL(httpFlag, .all)?.takeRetainedValue() as? [URL] else {
+			return []
+		}
+		return .init(Set(urls))
 	}
 
-	/// Get the file system path of the current application that by default opens "http:"-URLs
-	/// - Returns: The URL of the default browser.
-	func getDefaultBrowserURL() -> URL? {
-		LSCopyDefaultApplicationURLForURL(HTTP_FLAG, .all, nil)?.takeRetainedValue() as URL?
+	static func getDefaultBrowserURL() -> URL? {
+		LSCopyDefaultApplicationURLForURL(httpFlag, .all, nil)?.takeRetainedValue() as URL?
 	}
 	
-	func setDefault(browser bundle: BrowserBundle, fileHandle standardOutput: FileHandle) {
+	static func setDefault(browser bundle: BrowserBundle) {
 		if bundle.isDefault {
-			standardOutput.write("\(bundle.name) (\(bundle.id)) is already the default browser")
+			let msg: Data = Data("\(bundle.name) (\(bundle.id)) is already the default browser".utf8)
+			stdOut.write(msg)
+			exit(.success)
 		} else {
 			LSSetDefaultHandlerForURLScheme("http" as CFString, bundle.id as CFString)
-			standardOutput.write("\(bundle.name) (\(bundle.id)) is now the default browser")
+			let msg: Data = Data("\(bundle.name) (\(bundle.id)) is now the default browser".utf8)
+			stdOut.write(msg)
+			exit(.success)
 		}
 	}
 }
 
-Command.main()
 
+extension Workflow {
+	enum ExitCode { case success, failure }
+	static func exit(_ code: ExitCode) -> Never {
+		switch code {
+		case .success: Darwin.exit(EXIT_SUCCESS)
+		case .failure: Darwin.exit(EXIT_FAILURE)
+		}
+	}
+}
 
 
 // ===---------------------------------------------=== //
-// Utils & Helpers
+// MARK: Helpers
 // ===---------------------------------------------=== //
 
 struct BrowserBundle {
-	var id: String
-	var name: String
-	var url: URL
-	var isDefault = false
-}
-
-extension BrowserBundle {
+	let id: String
+	let name: String
+	let url: URL
+	let isDefault: Bool
 	var description: String { "\(isDefault ? "*" : " ") \(id) (\(name))" }
-	func println() { print(description) }
-}
-
-
-extension FileHandle: TextOutputStream {
-	public func write(_ string: String) {
-		if let data: Data = string.data(using: .utf8) {
-			write(data)
-		}
-	}
 }
 
 extension Bundle {
-	var name: String? {
-		(infoDictionary?["CFBundleDisplayName"] ?? infoDictionary?["CFBundleName"]) as? String
-	}
+	var name: String? { (infoDictionary?["CFBundleDisplayName"] ?? infoDictionary?["CFBundleName"]) as? String }
 }
 
 extension Array where Element == URL {
+	
 	func intoBrowserBundles(currentDefault defaultBrowserPath: URL?) -> [BrowserBundle] {
-		reduce(into: [], { partialResult, url in
-			if let b = Bundle(url: url), b.bundleIdentifier != nil {
-				partialResult.append(
-					BrowserBundle(
-						id: b.bundleIdentifier!,
-						name: b.name ?? "unknown",
-						url: b.bundleURL,
-						isDefault: b.bundleURL == defaultBrowserPath
-					)
-				)
+		return reduce(into: [], {
+			if let bundle: Bundle = .init(url: $1),
+			   let bID: String = bundle.bundleIdentifier
+			{
+				let name: String = bundle.name ?? "unknown"
+				let url: URL = bundle.bundleURL
+				let isDefault: Bool = bundle.bundleURL == defaultBrowserPath
+				let bb: BrowserBundle = .init(id: bID, name: name, url: url, isDefault: isDefault)
+				$0.append(bb)
 			}
-		})
-		.sorted(by: { $0.id > $1.id })
+		}).sorted(by: { $0.id > $1.id })
 	}
+	
 }
