@@ -59,13 +59,11 @@ extension Workflow {
 	
 	static func setDefault(browser bundle: BrowserBundle) {
 		if bundle.isDefault {
-			//let msg: Data = Data("\(bundle.name) already is the default browser".utf8)
 			let msg: Data = Data("same,\(bundle.name),already is the default browser".utf8)
 			stdOut.write(msg)
 			exit(.success)
 		} else {
 			LSSetDefaultHandlerForURLScheme("http" as CFString, bundle.id as CFString)
-			//let msg: Data = Data("\(bundle.name) is now the default browser".utf8)
 			let msg: Data = Data("success,\(bundle.name),is now the default browser".utf8)
 			stdOut.write(msg)
 			exit(.success)
