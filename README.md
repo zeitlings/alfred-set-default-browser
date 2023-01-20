@@ -9,8 +9,7 @@ Add the browsers that you are missing to the list filter and provide the bundle 
 
 ## Script Version
 
-v1.1.1 dispenses with the executable entirely. The code runs directly in Alfred's Run Script workflow object. There is no noticable performance penalty and no manual compilation or `chmod +x` permissions are required. The code is largely a rewrite of [this code by "J.W. Bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adapted to work well with Alfred.
-
+v1.1.1 dispenses with the executable entirely. The code runs directly in Alfred's Run Script workflow object. There is no noticable performance penalty and no manual compilation or `chmod +x` permissions are required.
 
 ## Compiled Version (command line)
 
@@ -79,3 +78,7 @@ Tor Browser		| org.torproject.torbrowser
 Microsoft Edge		| com.microsoft.edgemac
 Vivaldi			| com.vivaldi.Vivaldi
 ```
+
+## Credit
+
+- [J. W. Bargsten](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1)
