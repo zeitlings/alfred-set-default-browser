@@ -12,11 +12,11 @@ Add the browsers that you are missing to the list filter and provide the bundle 
 v1.1.1 dispenses with the executable entirely. The code runs directly in Alfred's Run Script workflow object. There is no noticable performance penalty and no manual compilation or `chmod +x` permissions are required. The code is largely a rewrite of [this code by "J.W. Bargsten"](https://bargsten.org/wissen/publish-swift-app-via-homebrew/#lab-section-1) and adapted to work well with Alfred.
 
 
-## Compiled Version
+## Compiled Version (command line)
 
 <details>
 
-  <summary>Compiled Version (command line)</summary>
+  <summary>See Details</summary>
 
 
 The executable can be used to change the default browser from the command line: `./set_default_browser tor`
@@ -62,6 +62,8 @@ Copy the executable and replace the version that comes with the workflow.
 
 
 ---
+
+![preview](img.jpg)
 
  __Some Popular Browsers__
  
