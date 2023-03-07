@@ -4,12 +4,33 @@
 - Script Version [[Download Here]](https://github.com/zeitlings/alfred-set-default-browser/releases/tag/v1.1.1) (preferred)
 
 
-Add the browsers that you are missing to the list filter and provide the bundle identifiers for them. Instead of adding the bundle identifier for, e.g. Brave Browser `com.brave.Browser`, just providing the name (Brave) should also work. This has not been thoroughly tested. 
+Add the browsers you are missing to the list filter and provide the bundle identifiers for them. Instead of adding the bundle identifier for, e.g. Brave Browser `com.brave.Browser`, just providing the name (Brave) should also work.
 
-
+<!--
 ## Script Version
 
 v1.1.1 dispenses with the executable entirely. The code runs directly in Alfred's Run Script workflow object. There is no noticable performance penalty and no manual compilation or `chmod +x` permissions are required.
+-->
+
+<!--![preview](img.jpg)-->
+<img src="img.jpg" width="750px" />
+
+ __Some Popular Browsers__
+ 
+```
+ Name			| Bundle Identifier
+--------------------------------------------
+Safari			| com.apple.Safari
+Google Chrome		| com.google.Chrome
+Firefox			| org.mozilla.firefox
+Opera			| com.operasoftware.Opera
+Brave Browser		| com.brave.Browser
+Tor Browser		| org.torproject.torbrowser
+Microsoft Edge		| com.microsoft.edgemac
+Vivaldi			| com.vivaldi.Vivaldi
+```
+
+---
 
 ## Compiled Version (command line)
 
@@ -60,24 +81,6 @@ Copy the executable and replace the version that comes with the workflow.
 </details>
 
 
----
-
-![preview](img.jpg)
-
- __Some Popular Browsers__
- 
-```
- Name			| Bundle Identifier
---------------------------------------------
-Safari			| com.apple.Safari
-Google Chrome		| com.google.Chrome
-Firefox			| org.mozilla.firefox
-Opera			| com.operasoftware.Opera
-Brave Browser		| com.brave.Browser
-Tor Browser		| org.torproject.torbrowser
-Microsoft Edge		| com.microsoft.edgemac
-Vivaldi			| com.vivaldi.Vivaldi
-```
 
 ## Credit
 
