@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="img/icon.png"></br>
+    <img src="workflow/icon.png"></br>
     Default Browser</br>
     <a href="https://github.com/zeitlings/alfred-set-default-browser/releases"><img src="https://img.shields.io/github/v/release/zeitlings/alfred-set-default-browser.svg" alt="GitHub Release"></a>
 </h1>
@@ -15,9 +15,9 @@ An [Alfred](https://www.alfredapp.com/) workflow to set the default web browser.
 
 Add the browsers you're missing to the list filter and provide the bundle identifiers for them, or remove the ones that you don't need. Instead of adding the bundle identifier for, say, Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. 
 
-<img src="img/sdb1.png" width="630px">
-<img src="img/sdb2.png" width="630px">
-<img src="img/sdb3.png" width="630px">
+<img src="workflow/Images/sdb1.png" width="630px">
+<img src="workflow/Images/sdb2.png" width="630px">
+<img src="workflow/Images/sdb3.png" width="630px">
 
 ---
 
