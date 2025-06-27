@@ -58,7 +58,7 @@ extension Workflow {
 		let browserDefault: URL? = getDefaultBrowserURL()
 		let browserBundles: [BrowserBundle] = browsersUsable
 			.intoBrowserBundles(currentDefault: browserDefault)
-			.filter({ !blacklist.contains($0.name) })
+			.filter({ !blacklist.contains($0.url.path(percentEncoded: false)) })
 			.filter({ $0.isUsable })
 		return browserBundles
 	}()
@@ -177,7 +177,7 @@ internal struct BrowserBundle {
 			$0.arg = arg
 			if !isDefault {
 				$0.cmdshift = Modifier(
-					arg: "blacklist,\(name)",
+					arg: "blacklist,\(url.path(percentEncoded: false))",
 					subtitle: "⭕️ Add to Blacklist"
 				)
 			}
