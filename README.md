@@ -16,6 +16,11 @@ An [Alfred](https://www.alfredapp.com/) workflow to set the default web browser.
 Add the browsers you're missing to the list filter and provide the bundle identifiers for them, or remove the ones that you don't need. Instead of adding the bundle identifier for, say, Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. 
 
 <img src="img/sdb1.png" width="630px">
+
+- <kbd>⏎</kbd> Set as default browser
+- <kbd>⌘</kbd><kbd>⇧</kbd><kbd>⏎</kbd> Blacklist the application
+- <kbd>⌃</kbd> View the file path of the application
+
 <img src="img/sdb2.png" width="630px">
 <img src="img/sdb3.png" width="630px">
 
