@@ -11,15 +11,13 @@ An [Alfred](https://www.alfredapp.com/) workflow to set the default web browser.
 - Set the default web browser using the keyword (default: `sdb`).
 - The macOS browser change confirmation dialog is automatically accepted.
 
-**Utility**: Use the workflow's [File Action](https://www.alfredapp.com/help/workflows/triggers/file-action/) (name: `Bundle Identifier Information`) to retrieve an application's bundle identifier.
-
-Add the browsers you're missing to the list filter and provide the bundle identifiers for them, or remove the ones that you don't need. Instead of adding the bundle identifier for, say, Brave Browser (`com.brave.Browser`), just providing the name (Brave) should also work. 
-
 <img src="img/sdb1.png" width="630px">
 
 - <kbd>⏎</kbd> Set as default browser
 - <kbd>⌘</kbd><kbd>⇧</kbd><kbd>⏎</kbd> Blacklist the application
 - <kbd>⌃</kbd> View the file path of the application
+
+**Utility**: Use the workflow's [File Action](https://www.alfredapp.com/help/workflows/triggers/file-action/) (name: `Bundle Identifier Information`) to retrieve an application's bundle identifier (Legacy). 
 
 <img src="img/sdb2.png" width="630px">
 <img src="img/sdb3.png" width="630px">
